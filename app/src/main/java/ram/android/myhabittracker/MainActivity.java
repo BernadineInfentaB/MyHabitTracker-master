@@ -34,11 +34,7 @@ public class MainActivity extends AppCompatActivity {
         //String text = textview.getText().toString();
        // textview.setText("new Text");
 
-        final EditText habitEditText = (EditText) findViewById(R.id.habitEditText);
-        String habit= habitEditText.getText().toString();
 
-        EditText timeViewtype = (EditText) findViewById(R.id.timeView);
-        String time= timeViewtype.getText().toString();
 
         Button samplebutton = (Button) findViewById(R.id.insert_button);
 
@@ -52,34 +48,26 @@ public class MainActivity extends AppCompatActivity {
                 EditText timeViewtype = (EditText) findViewById(R.id.timeView);
                 Integer time=Integer.parseInt(timeViewtype.getText().toString());
                 insertHabit(habit,time);
-                readHabits(habit);
+
             }
         });
+
         Button readbutton = (Button) findViewById(R.id.read);
-        readbutton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
+       readbutton.setOnClickListener(new View.OnClickListener() {
+
+           public void onClick(View v)
             {
                 TextView textview = (TextView) findViewById(R.id.h_text);
-                String text = textview.getText().toString();
-                textview.setText("Enter the hobby name");
+                String habit = textview.getText().toString();
+                textview.setText("Enter the habbit name");
 
-               //Integer tim=Integer.parseInt(timeViewtype.getText().toString());
+                 readHabits(habit);
 
-                TextView textvie = (TextView) findViewById(R.id.t_text);
-                String tim = textvie.getText().toString();
-                textview.setText("new time");
-                readHabits(ha);
+
             }
         });
 
-        insertHabit("Yoga", 120);
-        insertHabit("Yoga", 200);
-        insertHabit("Yoga", 60);
-        insertHabit("Gaming", 45);
-        readHabits("Yoga");
-        deleteEntries();
-        insertHabit("Cycling", 45);
-        insertHabit("Walking", 60);
+
     }
 
     //Insert method for making an entry to the habit tracker database
@@ -118,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             } while (c.moveToNext());
             Log.v("Result of query ", result);
+            TextView scoreView = (TextView) findViewById(R.id.h_text);
+            scoreView.setText(String.valueOf(result));
         }
         c.close();
     }
